@@ -1,28 +1,54 @@
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
 [project]
 name = "download-webpage-data"
-version = "0.1.0"
-description = "A tool to download website contents through Tor with German exit nodes"
+version = "1.0.2"
+description = "A tool to download website contents through Tor with German exit nodes and extract images"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    { name = "Tadeas Fort", email = "business@tadeasfort.com" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = [
     "requests>=2.31.0",
     "PySocks>=1.7.1",
     "stem>=1.8.2",
     "beautifulsoup4>=4.12.3",
     "urllib3>=2.2.0",
-    "wget>=3.2"
 ]
-readme = "README.md"
-requires-python = ">= 3.8"
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+[project.urls]
+Homepage = "https://github.com/tadeasf/dld-web-tor"
+Repository = "https://github.com/tadeasf/dld-web-tor.git"
+Issues = "https://github.com/tadeasf/dld-web-tor/issues"
 
-[tool.rye]
-managed = true
-dev-dependencies = []
+[project.scripts]
+download-webpage = "download_webpage_data.__main__:main"
+extract-images = "download_webpage_data.extract_images:main"
 
-[tool.hatch.metadata]
-allow-direct-references = true
+[tool.pdm]
+package-dir = "src"
+source-includes = ["src/download_webpage_data/**/*.py"]
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/download_webpage_data"]
+[tool.pdm.build]
+includes = ["src/download_webpage_data"]
+excludes = ["tests"]
+is-purelib = true

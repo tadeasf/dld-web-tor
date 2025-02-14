@@ -31,5 +31,3 @@ typing-extensions==4.12.2
 urllib3==2.3.0
     # via download-webpage-data
     # via requests
-wget==3.2
-    # via download-webpage-data
